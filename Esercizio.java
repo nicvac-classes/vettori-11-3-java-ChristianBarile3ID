@@ -5,21 +5,12 @@ class Esercizio {
 
     public static int eliminaDuplicati(int[] V) {
         int i, j, k, N2, h;
-        int[] W = new int [V.length-1];
         N2 = V.length-1;
         for (i=0; i<=V.length-2; i++) {
             for (j=i+1; j<=V.length-1; j++) {
                 if (V[i]==V[j]) {
-                    k = j;
-                    for (h=0; h<=k-1; h++) {
-                        W[i] = V[i];
-                    }
-                    for (h=k; h<=V.length-1; h++) {
-                        W[i] = V[i+1];
-                    }
-                    for (h=0; h<=V.length-1; h++) {
-                        V[i] = W[i];
-                    }
+                    N2 = eliminaElemento(V, i);
+                    N2 = eliminaElemento(V, j);
                 }
             }
         }
@@ -28,34 +19,20 @@ class Esercizio {
 
     public static int eliminaElemento(int[] V, int posizione) {
         int i, N2;
-        int[] W = new int[V.length-1];
         N2 = V.length-1;
-        for (i=0; i<=posizione-1; i++) {
-            W[i] = V[i];
-        }
-        for (i=posizione; i<=V.length-1; i++) {
-            W[i] = V[i+1];
-        }
-        for (i=0; i<=V.length-1; i++) {
-            V[i] = W[i];
+        for (i=posizione; i<N2; i++) {
+            V[i] = V[i+1];
         }
         return N2;
     }
 
     public static int inserisciElemento(int[] V, int posizione, int valore) {
         int i, N2;
-        int[] W = new int[V.length+1];
         N2 = V.length+1;
-        for (i=0; i<=posizione-1; i++) {
-            W[i] = V[i];
+        for (i=V.length; i>posizione; i--) {
+            V[i] = V[i-1];
         }
-        W[posizione] = valore;
-        for (i=posizione; i<=V.length-1; i++) {
-            W[i] = V[i-1];
-        }
-        for (i=0; i<=V.length; i++) {
-            V[i] = W[i];
-        }
+        V[posizione] = valore;
         return N2;
     }
 
