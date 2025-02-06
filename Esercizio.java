@@ -4,15 +4,29 @@ import java.util.Arrays;
 class Esercizio {
 
     public static int eliminaDuplicati(int[] V) {
-        int i, j, k, N2, h;
-        N2 = V.length-1;
-        for (i=0; i<=V.length-2; i++) {
-            for (j=i+1; j<=V.length-1; j++) {
+        int i, N2, j, k;
+        boolean duplicato;
+        int[] W = new int[V.length];
+        k = 0;
+        i = 0;
+        while (i<V.length) {
+            j = i+1;
+            duplicato = false;
+            while (j<V.length && !duplicato) {
                 if (V[i]==V[j]) {
-                    N2 = eliminaElemento(V, i);
-                    N2 = eliminaElemento(V, j);
+                    duplicato = true;
                 }
+                j++;
             }
+            if (!duplicato) {
+                W[k] = V[i];
+                k++;
+            }
+            i++;
+        }
+        N2 = k;
+        for (i=0; i<k; i++) {
+            V[i] = W[i];
         }
         return N2;
     }
